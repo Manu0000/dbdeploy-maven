@@ -28,8 +28,7 @@
 			<version>11.2.0.2.0</version>
 	</dependency>
 	</dependencies>
-        
-	<id>build-deploy-objects</id>
+        <id>build-deploy-objects</id>
 	<build>
 		<plugins>
 			<plugin>
@@ -69,19 +68,7 @@
 					<undoOutputfile>undo.sql</undoOutputfile>
 				</configuration>
 
-				<dependencies>
-					<dependency>
-						<groupId>postgresql</groupId>
-						<artifactId>postgresql</artifactId>
-						<version>9.1-901.jdbc4</version>
-					</dependency>
-					<dependency>
-						<groupId>com.dbdeploy</groupId>
-						<artifactId>dbdeploy-core</artifactId>
-						<version>3.0M3</version>
-					</dependency>
-				</dependencies>
-			</plugin>
+				</plugin>
 		</plugins>
 	</build>
 </project>
