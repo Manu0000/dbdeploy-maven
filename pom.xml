@@ -28,7 +28,8 @@
 			<version>11.2.0.2.0</version>
 	</dependency>
 	</dependencies>
-	
+	<profiles>
+	<profile>
 	<id>db1</id>
 	<build>
 		<plugins>
@@ -67,5 +68,7 @@
 
 				</plugin>
 		</plugins>
-	</build>
+		</profile>
+		</profiles>
+		</build>
 </project>
