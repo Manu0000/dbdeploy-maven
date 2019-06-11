@@ -69,7 +69,7 @@
 <execution>
 <phase>install</phase>
                         <goals>
-                            <goal>install</goal>
+                            <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>
