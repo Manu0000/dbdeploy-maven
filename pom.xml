@@ -9,7 +9,7 @@
 	<description>An example that shows how to use the DB Deploy Plugin in Maven using Postgres, that actually works.</description>
 
 	<properties>
-		<db.driver>org.postgresql.Driver</db.driver>
+		<db.driver>oracle.jdbc.driver.OracleDriver</db.driver>
 		<db.url>jdbc:oracle:thin:@//192.168.41.56:1521/devopsdb</db.url>
 		<db.user>testdevops</db.user>
 		<db.passwd>testdevops</db.passwd>
@@ -18,41 +18,34 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+			<groupId>com.ap.maven.plugins</groupId>
+			<artifactId>maven-database-util-plugin</artifactId>
 			<version>9.1-901.jdbc4</version>
 		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.2.0</version>
+	</dependency>
 	</dependencies>
-
+        
+	<id>build-deploy-objects</id>
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sql-maven-plugin</artifactId>
-				<version>1.1</version>
-				<dependencies>
-					<dependency>
-						<groupId>postgresql</groupId>
-						<artifactId>postgresql</artifactId>
-						<version>9.1-901.jdbc4</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<driver>${db.driver}</driver>
-					<url>${db.url}</url>
-					<username>${db.user}</username>
-					<password>${db.passwd}</password>
-				</configuration>
+				<groupId>com.ap.maven.plugins</groupId>
+				<artifactId>maven-database-util-plugin</artifactId>
+								
 				<executions>
 					<execution>
-						<id>create-change-log</id>
-						<phase>process-test-sources</phase>
+						<id>build-deploy-objects</id>
+						<phase>package</phase>
 						<goals>
 							<goal>execute</goal>
 						</goals>
 						<configuration>
 							<srcFiles>
-								<srcFile>${basedir}/db/scripts/createSchemaVersionTable.sql</srcFile>
+								<srcFile>/home/dbdeploy/srcfiles/createtable.sql</srcFile>
 							</srcFiles>
 						</configuration>
 					</execution>
