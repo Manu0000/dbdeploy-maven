@@ -27,7 +27,7 @@
     <groupId>com.oracle</groupId>
     <artifactId>ojdbc6</artifactId>
     <version>11.1.0.7.0</version>
-    <scope>test</scope>
+    <scope>compile</scope>
 </dependency>
 	</dependencies>
 
