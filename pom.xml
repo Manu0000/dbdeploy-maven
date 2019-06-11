@@ -69,7 +69,7 @@
 <execution>
 <phase>install</phase>
                         <goals>
-                            <goal>driver</goal>
+                            <goal>ojdbc14-10.2.0.4.0-jar</goal>
                         </goals>
                     </execution>
                 </executions>
