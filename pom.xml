@@ -69,7 +69,7 @@
 <execution>
 <phase>install</phase>
                         <goals>
-                            <goal>ojdbc14-10.2.0.4.0-jar</goal>
+                            <goal></goal>
                         </goals>
                     </execution>
                 </executions>
