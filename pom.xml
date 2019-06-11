@@ -28,7 +28,8 @@
 			<version>11.2.0.2.0</version>
 	</dependency>
 	</dependencies>
-        <id>build-deploy-objects</id>
+	
+	<id>db1</id>
 	<build>
 		<plugins>
 			<plugin>
@@ -37,7 +38,7 @@
 								
 				<executions>
 					<execution>
-						<id>build-deploy-objects</id>
+						<id>db1</id>
 						<phase>package</phase>
 						<goals>
 							<goal>execute</goal>
