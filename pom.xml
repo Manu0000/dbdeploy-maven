@@ -94,8 +94,7 @@
     <artifactId>ojdbc14</artifactId>
     <version>10.2.0.4.0</version>
 </dependency>
-					</dependency>
-					<dependency>
+<dependency>
 						<groupId>com.dbdeploy</groupId>
 						<artifactId>dbdeploy-core</artifactId>
 						<version>3.0M3</version>
