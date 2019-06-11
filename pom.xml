@@ -37,13 +37,15 @@
 				<artifactId>sql-maven-plugin</artifactId>
 				<version>1.1</version>
 				<dependencies>
-					<dependency>
-					<!--	<groupId>postgresql</groupId>
+					<!-- <dependency>
+						<groupId>postgresql</groupId>
 						<artifactId>postgresql</artifactId>
 						<version>9.1-901.jdbc4</version> -->
+    <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 -->
+<dependency>
     <groupId>com.oracle</groupId>
     <artifactId>ojdbc14</artifactId>
-    <version>10.2.0.4.0</version>
+    <version>10.2.0.2.0</version>
 </dependency>
 				</dependencies>
 				<configuration>
@@ -86,10 +88,12 @@
 				</configuration>
 
 				<dependencies>
-					<dependency>
-					<!--	<groupId>postgresql</groupId>
+				<!--	<dependency>
+						<groupId>postgresql</groupId>
 						<artifactId>postgresql</artifactId>
 						<version>9.1-901.jdbc4</version> -->
+    <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 -->
+<dependency>
     <groupId>com.oracle</groupId>
     <artifactId>ojdbc14</artifactId>
     <version>10.2.0.4.0</version>
