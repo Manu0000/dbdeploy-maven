@@ -9,7 +9,7 @@
 	<description>An example that shows how to use the DB Deploy Plugin in Maven using Postgres, that actually works.</description>
 
 	<properties>
-		<db.driver>org.postgresql.Driver</db.driver>
+		<db.driver>org.oracle.Driver</db.driver>
 		<db.url>jdbc:oracle:thin:@//192.168.41.56:1521/devopsdb</db.url>
 		<db.user>testdevops</db.user>
 		<db.passwd>testdevops</db.passwd>
@@ -18,10 +18,17 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>postgresql</groupId>
+		<!--	<groupId>postgresql</groupId> 
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901.jdbc4</version>
-		</dependency>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
+<dependency>
+    <groupId>com.oracle</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>11.1.0.7.0</version>
+    <scope>test</scope>
+</dependency>
 	</dependencies>
 
 	<build>
@@ -32,9 +39,13 @@
 				<version>1.1</version>
 				<dependencies>
 					<dependency>
-						<groupId>postgresql</groupId>
+					<!--	<groupId>postgresql</groupId>
 						<artifactId>postgresql</artifactId>
-						<version>9.1-901.jdbc4</version>
+						<version>9.1-901.jdbc4</version> -->
+    <groupId>com.oracle</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>11.1.0.7.0</version>
+    <scope>test</scope>
 					</dependency>
 				</dependencies>
 				<configuration>
@@ -78,9 +89,13 @@
 
 				<dependencies>
 					<dependency>
-						<groupId>postgresql</groupId>
+					<!--	<groupId>postgresql</groupId>
 						<artifactId>postgresql</artifactId>
-						<version>9.1-901.jdbc4</version>
+						<version>9.1-901.jdbc4</version> -->
+    <groupId>com.oracle</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>11.1.0.7.0</version>
+    <scope>test</scope>
 					</dependency>
 					<dependency>
 						<groupId>com.dbdeploy</groupId>
