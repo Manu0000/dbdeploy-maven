@@ -69,7 +69,7 @@
 <execution>
 <phase>install</phase>
                         <goals>
-                            <goal>${driver}</goal>
+                            <goal>driver</goal>
                         </goals>
                     </execution>
                 </executions>
