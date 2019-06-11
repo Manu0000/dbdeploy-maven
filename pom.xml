@@ -66,10 +66,10 @@
 <groupId>com.dbdeploy</groupId>
 <artifactId>maven-dbdeploy-plugin</artifactId>
 <executions>
-                    <execution>
-   <phase>install</phase>
+<execution>
+<phase>install</phase>
                         <goals>
-                            <goal>update</goal>
+                            <goal>${driver}</goal>
                         </goals>
                     </execution>
                 </executions>
