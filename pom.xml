@@ -69,7 +69,7 @@
 <execution>
 <phase>install</phase>
                         <goals>
-                            <goal></goal>
+                            <goal>clean</goal>
                         </goals>
                     </execution>
                 </executions>
