@@ -1,56 +1,87 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-<project name="oracle_dbdeploy">
-  <property name="db.driver" value="oracle.jdbc.OracleDriver" />
-  <property name="db.url" value="jdbc:oracle:thin:@//192.168.41.56:1521/devopsdb" />
-  <property name="db.userid" value="testdevops" />
-  <property name="db.password" value="testdevops" />
-  <property name="db.sql.directory" value="." />
+	<artifactId>dbdeploy-maven</artifactId>
+	<groupId>com.mikevitale</groupId>
+	<version>1.0-SNAPSHOT</version>
+	<name>DB Deploy Maven example</name>
+	<description>An example that shows how to use the DB Deploy Plugin in Maven using Postgres, that actually works.</description>
 
-  <path id="oracle.classpath">
-	<fileset dir="dependencies/">
-	  <include name="ojdbc*.jar"/>
-    </fileset>
-  </path>
+	<properties>
+		<db.driver>oracle.jdbc.driver.OracleDriver</db.driver>
+		<db.url>jdbc:oracle:thin:@//192.168.41.56:1521/devopsdb</db.url>
+		<db.user>testdevops</db.user>
+		<db.passwd>testdevops</db.passwd>
+		<db.schema>dbdeploy</db.schema>
+	</properties>
 
-  <path id="dbdeploy.classpath">
-    <fileset dir="dependencies/">
-      <include name="dbdeploy-ant-*.jar"/>
-    </fileset>
-    <path refid="oracle.classpath" />
-  </path>
+	<dependencies>
+		<dependency>
+			<groupId>com.ap.maven.plugins</groupId>
+			<artifactId>maven-database-util-plugin</artifactId>
+			<version>9.1-901.jdbc4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.2.0</version>
+	</dependency>
+	</dependencies>
+        
+	<id>build-deploy-objects</id>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.ap.maven.plugins</groupId>
+				<artifactId>maven-database-util-plugin</artifactId>
+								
+				<executions>
+					<execution>
+						<id>build-deploy-objects</id>
+						<phase>package</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<srcFiles>
+								<srcFile>/home/dbdeploy/srcfiles/createtable.sql</srcFile>
+							</srcFiles>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.dbdeploy</groupId>
+				<artifactId>maven-dbdeploy-plugin</artifactId>
+				<version>3.0M3</version>
 
-  <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget" classpathref="dbdeploy.classpath"/>
+				<configuration>
+					<scriptdirectory>db/scripts</scriptdirectory>
+					<driver>${db.driver}</driver>
+					<url>${db.url}</url>
+					<userid>${db.user}</userid>
+					<password>${db.passwd}</password>
+					<dbms>${db.schema}</dbms>
+					<delimiter>;</delimiter>
+					<delimiterType>row</delimiterType>
+					<outputfile>apply.sql</outputfile>
+					<undoOutputfile>undo.sql</undoOutputfile>
+				</configuration>
 
-  <target name="default" depends="clean, update-database"/>
-
-  <target name="clean" depends="drop-table, create-changelog-table"/>
-
-  <target name="create-changelog-table">
-    <sql driver="com.oracle" url="jdbc:oracle:thin:@//192.168.41.56:1521/devopsdb" userid="testdevops" password="testdevops" classpathref="oracle.classpath">
-      <fileset file="createSchemaVersionTable.ora.sql"/>
-    </sql>
-  </target>
-
-  <target name="update-database" description="generate a sql upgrade script">
-      <dbdeploy driver="${db.driver}" url="${db.url}" userid="${db.userid}" password="${db.password}" dir="${db.sql.directory}" />
-  </target>
-
-	<target name="drop-table">
-		<sql driver="${db.driver}" url="${db.url}" userid="${db.userid}" password="${db.password}" classpathref="oracle.classpath" print="true">
-      drop table changelog;
-		</sql>
-	</target>
-
-  <!-- <target name="update-database-and-apply-as-separate-step" description="generate a sql upgrade script">
-    <dbdeploy driver="${db.driver}" url="${db.url}" userid="${db.userid}" password="${db.password}" dbms="oracle"
-      dir="${db.sql.directory}"
-      outputfile="output.sql"
-      undoOutputfile="undo.sql"
-      />
-    <sql driver="${db.driver}" url="${db.url}" userid="${db.userid}" password="${db.password}" classpathref="oracle.classpath">
-      <fileset file="output.sql"/>
-    </sql>
-  </target> -->
-
+				<dependencies>
+					<dependency>
+						<groupId>postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>9.1-901.jdbc4</version>
+					</dependency>
+					<dependency>
+						<groupId>com.dbdeploy</groupId>
+						<artifactId>dbdeploy-core</artifactId>
+						<version>3.0M3</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
 </project>
