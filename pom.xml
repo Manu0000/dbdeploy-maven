@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="oracle_dbdeploy_example" default="default">
+<project name="oracle_dbdeploy_example" default="oracle_dbdeploy">
   <property name="db.driver" value="oracle.jdbc.OracleDriver" />
   <property name="db.url" value="jdbc:oracle:thin:@//192.168.41.56:1521/devopsdb" />
   <property name="db.userid" value="testdevops" />
