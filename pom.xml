@@ -29,7 +29,7 @@
 	</dependency>
 	</dependencies>
         
-	<id>build-deploy-objects</id>
+	
 	<build>
 		<plugins>
 			<plugin>
