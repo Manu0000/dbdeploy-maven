@@ -81,7 +81,7 @@
                         <execution>
                             <configuration>
                                 <changeLogTableName>changelog</changeLogTableName>
-                                <scriptdirectory>${project.basedir}/src/main/sql</scriptdirectory>
+                                <scriptdirectory>${project.basedir}/src/main/resources/spring/createSchemaVersionTable.sql</scriptdirectory>
                                 <srcFiles>
                                 <srcFile>createSchemaVersionTable.sql</srcFile>
                                 </srcFiles>
