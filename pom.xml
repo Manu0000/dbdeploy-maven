@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -8,14 +8,15 @@
     <groupId>com.oracle</groupId>
     <version>1.0-SNAPSHOT</version>
     <name>DB Deploy Maven example</name>
-    <description>An example that shows how to use the DB Deploy Plugin in Maven using Postgres, that actually works.</description>
+    <description>An example that shows how to use the DB Deploy Plugin in Maven using Postgres, that actually works.
+    </description>
 
     <properties>
-        <db.driver>oracle.jdbc.driver.OracleDriver</db.driver>
-        <db.url>jdbc:oracle:thin:@//192.168.41.56:1521/devopsdb</db.url>
-        <db.user>testdevops</db.user>
-        <db.passwd>testdevops</db.passwd>
-      <!--  <db.schema>dbdeploy</db.schema> -->
+        <db-driver>oracle.jdbc.driver.OracleDriver</db-driver>
+        <db-url>jdbc:oracle:thin:@//192.168.41.56:1521/devopsdb</db-url>
+        <db-user>testdevops</db-user>
+        <db-passwd>testdevops</db-passwd>
+        <!--  <db.schema>dbdeploy</db.schema> -->
     </properties>
 
     <dependencies>
@@ -24,49 +25,116 @@
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc14</artifactId>
             <version>10.2.0.4.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}\external\Application\libojdbc14-10.2.0.4.0.jar</systemPath>
+
         </dependency>
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <!-- <plugin>
+                     <groupId>org.codehaus.mojo</groupId>
+                     <artifactId>properties-maven-plugin</artifactId>
+                     <version>1.0-alpha-2</version>
+                     <executions>
+                         <execution>
+                             <phase>initialize</phase>
+                             <goals>
+                                 <goal>read-project-properties</goal>
+                             </goals>
+                            &lt;!&ndash; <configuration>
+                                 <files>
+                                     <file>db.properties</file>
+                                 </files>
+                             </configuration>&ndash;&gt;
+                         </execution>
+                     </executions>
+                 </plugin>-->
+                <plugin>
+                    <groupId>com.dbdeploy</groupId>
+                    <artifactId>maven-dbdeploy-plugin</artifactId>
+                            <version>3.0M3</version>
+                    <configuration>
+                        <driver>oracle.jdbc.driver.OracleDriver</driver>
+                        <url>jdbc:oracle:thin:@//192.168.41.56:1521/devopsdb</url>
+                        <userid>testdevops</userid>
+                        <password>testdevops</password>
+                        <!--<dbms>${dbms}</dbms>-->
+                        <delimiter>;</delimiter>
+                        <delimiterType>row</delimiterType>
+                    </configuration>
+
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.oracle</groupId>
+                            <artifactId>ojdbc14</artifactId>
+                            <version>10.2.0.4.0</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>commons-lang</groupId>
+                            <artifactId>commons-lang</artifactId>
+                            <version>2.5</version>
+                        </dependency>
+                    </dependencies>
+
+                    <executions>
+                        <execution>
+                            <configuration>
+                                <changeLogTableName>changelog</changeLogTableName>
+                                <scriptdirectory>${project.basedir}/src/main/sql</scriptdirectory>
+                                <srcFiles>
+                                <srcFile>createSchemaVersionTable.sql</srcFile>
+                                </srcFiles>
+
+
+                                <!--<outputfile>output.sql</outputfile>
+                                <undoOutputfile>undo.sql</undoOutputfile>-->
+                            </configuration>
+                        </execution>
+
+
+                    </executions>
+                    <!--<changeLogTableName>changelog</changeLogTableName>-->
+                    <!--     <basedirectory>${project.basedir}</basedirectory>
+                         <srcFiles>
+                             <srcFile>/src/main/resources/spring/createSchemaVersionTable.sql</srcFile>
+                              </srcFiles>  -->
+                    <!--     <name>${project.basedir}/src/main/resources/spring/createSchemaVersionTable.sql</name> -->
+
+                    <!--  </configuration>-->
+
+                    <!-- <executions>
+                                         <execution>
+                                             
+                                             <configuration>
+                                                 <srcFiles>
+                                                     <srcFile>${project.build.outputDirectory}/spring/createSchemaVersionTable.sql</srcFile>
+                                                 </srcFiles>
+                                             </configuration>
+                                         </execution>
+                                     </executions>-->
+
+
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>ojdbc14</artifactId>
-                <version>1.1</version>
-                <dependencies>
-                    <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 -->
-                    <dependency>
-                        <groupId>com.oracle</groupId>
-                        <artifactId>ojdbc14</artifactId>
-                        <version>10.2.0.4.0</version>
-                        <scope>system</scope>
-                        <systemPath>${basedir}\external\Application\libojdbc14-10.2.0.4.0.jar</systemPath>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <driver>oracle.jdbc.driver.OracleDriver</driver>
-                    <url>jdbc:oracle:thin:@//192.168.41.56:1521/devopsdb</url>
-                    <username>testdevops</username>
-                    <password>testdevops</password>
-                </configuration>
+                <artifactId>properties-maven-plugin</artifactId>
+            </plugin>-->
+            <plugin>
+                <groupId>com.dbdeploy</groupId>
+                <artifactId>maven-dbdeploy-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>create-change-log</id>
-                        <phase>process-test-sources</phase>
+                        <phase>install</phase>
                         <goals>
-                            <goal>execute</goal>
+                            <goal>update</goal>
                         </goals>
-                        <configuration>
-                            <srcFiles>
-                                <srcFile>${basedir}/db/scripts/createSchemaVersionTable.sql</srcFile>
-                            </srcFiles>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 </project>
